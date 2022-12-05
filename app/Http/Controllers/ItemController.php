@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -14,8 +15,13 @@ class ItemController extends Controller
     public function index()
     {
         //
-        
-        return view('admin.items', compact('items'));
+        $items = new Item();
+
+        $data = [
+            'items' => $items->getAllItems()
+        ];
+        return view('admin.items', $data);
+
 
 
     }

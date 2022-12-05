@@ -18,7 +18,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Price</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Category</th>
+                            <th scope="col">Stock</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -29,10 +29,10 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->price }}</td>
                                 <td>{{ $item->description }}</td>
-                                <td>{{ $item->category }}</td>
+                                <td>{{ $item->stock }}</td>
                                 <td>
-                                    <a href="{{ route('item.edit', $item->id) }}" class="btn btn-primary">Edit</a>
-                                    <a href="{{ route('item.delete', $item->id) }}" class="btn btn-danger">Delete</a>
+                                    {{-- <a href="{{ route('item.edit', $item->id) }}" class="btn btn-primary">Edit</a>
+                                    <a href="{{ route('item.delete', $item->id) }}" class="btn btn-danger">Delete</a> --}}
                                 </td>
                             </tr>
                         @endforeach
