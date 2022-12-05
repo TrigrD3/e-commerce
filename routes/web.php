@@ -26,3 +26,5 @@ Route::get('/admin/dashboard', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/admin/items', [App\Http\Controllers\ItemController::class, 'index'])->name('items');
