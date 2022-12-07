@@ -313,7 +313,7 @@ return [
         ],
         [
             'text'        => 'Item',
-            'url'         => 'admin/items',
+            'url'         => 'admin/items/index',
             'icon'        => 'far fa-fw fa-file',
         ],
         

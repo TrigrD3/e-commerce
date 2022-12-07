@@ -27,4 +27,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/admin/items', [App\Http\Controllers\ItemController::class, 'index'])->name('items');
+Route::get('/admin/items/index', [App\Http\Controllers\ItemController::class, 'index'])->name('items');
+route::get('/admin/items/create', [App\Http\Controllers\ItemController::class, 'create'])->name('items.create');
+route::post('/admin/items', [App\Http\Controllers\ItemController::class, 'store'])->name('items.store');
+route::get('/admin/items/{id}', [App\Http\Controllers\ItemController::class, 'show'])->name('items.show');
+route::get('/admin/items/{id}/edit', [App\Http\Controllers\ItemController::class, 'edit'])->name('items.edit');
+route::put('/admin/items/{id}', [App\Http\Controllers\ItemController::class, 'update'])->name('items.update');
+route::delete('/admin/items/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('items.delete');
+

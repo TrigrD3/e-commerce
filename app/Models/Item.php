@@ -9,6 +9,13 @@ class Item extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+
+    ];
+
     function getAllItems() {
         return Item::all();
     }

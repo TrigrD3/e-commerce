@@ -4,6 +4,8 @@
 
 @section('content_header')
     <h1>Items</h1>
+    {{-- add button --}}
+    <a href="{{ route('items.create') }}" class="btn btn-primary">Add Item</a>
 @stop
 
 @section('content')
@@ -31,8 +33,13 @@
                                 <td>{{ $item->description }}</td>
                                 <td>{{ $item->stock }}</td>
                                 <td>
-                                    {{-- <a href="{{ route('item.edit', $item->id) }}" class="btn btn-primary">Edit</a>
-                                    <a href="{{ route('item.delete', $item->id) }}" class="btn btn-danger">Delete</a> --}}
+                                    <a href="{{ route('items.show', $item->id) }}" class="btn btn-secondary">View</a>
+                                    <a href="{{ route('items.edit', $item->id) }}" class="btn btn-primary">Edit</a>
+                                    <form action="{{ route('items.delete', $item->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                      </form>
                                 </td>
                             </tr>
                         @endforeach
