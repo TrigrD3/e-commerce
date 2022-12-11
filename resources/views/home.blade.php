@@ -14,6 +14,13 @@
                         </div>
                     @endif
 
+                    @if (Session::has('message'))
+                        <div class="alert alert-{{ Session::get('alert-type') }} alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            {{ Session::get('message') }}
+                        </div>
+                    @endif
+
                     {{ __('You are logged in!') }}
                 </div>
             </div>

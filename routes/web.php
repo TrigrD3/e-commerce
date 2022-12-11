@@ -19,9 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-});
+Route::get('/admin/dashboard', [App\Http\Controllers\PegawaiController::class, 'index'])->name('admin.dashboard');
 
 Auth::routes();
 

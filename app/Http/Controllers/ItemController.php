@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ItemController extends Controller
 {
@@ -14,17 +18,31 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
-        $items = new Item();
-
-        $data = [
-            'items' => $items->getAllItems()
-        ];
-        return view('admin.items.index', $data);
-
-
-
+        // Check if the authenticated user is logged in...
+        if (Auth::check()) {
+            // Check if the authenticated user is also in the pegawai table...
+            $user = Auth::user();
+            $pegawai = Pegawai::where('user_id', $user->id)->first();
+            if ($pegawai) {
+                $items = new Item();
+    
+                $data = [
+                    'items' => $items->getAllItems()
+                ];
+                // The authenticated user is in the pegawai table, so show the page...
+                return view('admin.items.index', $data);
+            } else {
+                // The authenticated user is not in the pegawai table, so set flash session variables and redirect to the login page...
+                Session::flash('message', 'You must be a pegawai to view this page.');
+                Session::flash('alert-type', 'warning');
+                return redirect()->route('login');
+            }
+        }
+    
+        // The user is not authenticated, so redirect to the login page...
+        return redirect()->route('login');
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -33,8 +51,23 @@ class ItemController extends Controller
      */
     public function create()
     {
-        $item = new Item();
-        return view('admin.items.create', compact('item'));
+
+        if (Auth::check()) {
+            // Check if the authenticated user is also in the pegawai table...
+            $user = Auth::user();
+            $pegawai = Pegawai::where('user_id', $user->id)->first();
+            if ($pegawai) {
+
+                // The authenticated user is in the pegawai table, so show the page...
+                $item = new Item();
+                return view('admin.items.create', compact('item'));
+            }
+        }
+        Session::flash('message', 'You must be a pegawai to view this page.');
+        Session::flash('alert-type', 'warning');
+        // The user is not authenticated or is not in the pegawai table, so redirect to the login page...
+        return redirect()->route('login');
+        
     }
 
     /**
@@ -80,13 +113,27 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        $item = new Item();
-        $item = Item::find($id);
-        if ($item === null) {
-            abort(404, "No item has been found.");
-        }
+    if (Auth::check()) {
+        // Check if the authenticated user is also in the pegawai table...
+        $user = Auth::user();
+        $pegawai = Pegawai::where('user_id', $user->id)->first();
+        if ($pegawai) {
 
-        return view('admin.items.edit', compact('item'));
+            // The authenticated user is in the pegawai table, so show the page...
+            $item = new Item();
+            $item = Item::find($id);
+            if ($item === null) {
+                abort(404, "No item has been found.");
+            }
+    
+            return view('admin.items.edit', compact('item'));
+        }
+    }
+    Session::flash('message', 'You must be a pegawai to view this page.');
+    Session::flash('alert-type', 'warning');
+    // The user is not authenticated or is not in the pegawai table, so redirect to the login page...
+    return redirect()->route('login');
+
     }
 
     /**
@@ -122,13 +169,28 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        $item = new Item();
-        $item = Item::find($id);
-        if ($item === null) {
-            abort(404, "No item has been found.");
-        }
 
-        $item->delete();
-        return redirect()->route('items');
+    if (Auth::check()) {
+        // Check if the authenticated user is also in the pegawai table...
+        $user = Auth::user();
+        $pegawai = Pegawai::where('user_id', $user->id)->first();
+        if ($pegawai) {
+
+            // The authenticated user is in the pegawai table, so show the page...
+            $item = new Item();
+            $item = Item::find($id);
+            if ($item === null) {
+                abort(404, "No item has been found.");
+            }
+    
+            $item->delete();
+            return redirect()->route('items');
+        }
+    }
+    Session::flash('message', 'You must be a pegawai to view this page.');
+    Session::flash('alert-type', 'warning');
+    // The user is not authenticated or is not in the pegawai table, so redirect to the login page...
+    return redirect()->route('login');
+
     }
 }
