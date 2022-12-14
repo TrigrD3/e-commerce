@@ -33,7 +33,7 @@ class PegawaiController extends Controller
         Session::flash('message', 'You must be a pegawai to view this page.');
         Session::flash('alert-type', 'warning');
         // The user is not authenticated or is not in the pegawai table, so redirect to the login page...
-        return redirect()->route('login');
+        return redirect('/home');
     }
 
     /**
