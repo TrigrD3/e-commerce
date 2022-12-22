@@ -9,5 +9,10 @@ class Pegawai extends Model
 {
     use HasFactory;
     protected $table = 'pegawai';
+
+    public function getAllPegawai()
+    {
+        return Pegawai::all();
+    }
     
 }

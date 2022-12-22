@@ -19,11 +19,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/admin/dashboard', [App\Http\Controllers\PegawaiController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/users/index', [App\Http\Controllers\UserController::class, 'index'])->name('admin.users.index');
+Route::get('/admin/admins/index', [App\Http\Controllers\PegawaiController::class, 'getPegawai'])->name('admin.users.pegawai');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home/{id}', [App\Http\Controllers\HomeController::class, 'show'])->name('home.item');
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart');
+Route::post('/cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
+
 
 Route::get('/admin/items/index', [App\Http\Controllers\ItemController::class, 'index'])->name('items');
 route::get('/admin/items/create', [App\Http\Controllers\ItemController::class, 'create'])->name('items.create');

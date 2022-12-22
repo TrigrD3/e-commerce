@@ -35,7 +35,17 @@ class ItemController extends Controller
                 // The authenticated user is not in the pegawai table, so set flash session variables and redirect to the login page...
                 Session::flash('message', 'You must be a pegawai to view this page.');
                 Session::flash('alert-type', 'warning');
+                
                 return redirect()->route('login');
+                ?>
+                <script>
+                    Swal.fire({
+                    title: 'Warning',
+                    text: '<%= session[:message] %>',
+                    icon: 'warning'
+                    });
+                </script>
+                <?php
             }
         }
     
@@ -82,6 +92,7 @@ class ItemController extends Controller
         $item->name = request('name');
         $item->price = request('price');
         $item->stock = request('stock');
+        $item->img = request('img');
         $item->description = request('description');
         $item->save();
 

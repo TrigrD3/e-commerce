@@ -18,6 +18,11 @@
           </div>
 
           <div class="form-group">
+            <label for="img">Img</label>
+            <input type="text" name="img" id="img" class="form-control">
+          </div>
+
+          <div class="form-group">
             <label for="price">Price</label>
             <input type="text" name="price" id="price" class="form-control">
           </div>

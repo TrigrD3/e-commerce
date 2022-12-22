@@ -32,8 +32,27 @@ class PegawaiController extends Controller
         }
         Session::flash('message', 'You must be a pegawai to view this page.');
         Session::flash('alert-type', 'warning');
+
         // The user is not authenticated or is not in the pegawai table, so redirect to the login page...
         return redirect('/home');
+        ?>
+        <script>
+            Swal.fire({
+            title: 'Warning',
+            text: '<%= session[:message] %>',
+            icon: 'warning'
+            });
+        </script>
+        <?php
+
+    }
+
+    public function getPegawai(){
+        $pegawai = new Pegawai();
+        $data = [
+            'pegawai' => $pegawai->getAllPegawai()
+        ];
+        return view('admin.users.pegawai', $data);
     }
 
     /**

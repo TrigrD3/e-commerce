@@ -17,6 +17,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">img</th>
                             <th scope="col">Name</th>
                             <th scope="col">Price</th>
                             <th scope="col">Description</th>
@@ -28,6 +29,7 @@
                         @foreach ($items as $item)
                             <tr>
                                 <th scope="row">{{ $item->id }}</th>
+                                <td><img src="https://picsum.photos/300/200?random={{ $item->id }}" alt="" width="100px"></td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->price }}</td>
                                 <td>{{ $item->description }}</td>

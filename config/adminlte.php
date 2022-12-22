@@ -317,16 +317,15 @@ return [
             'icon'        => 'far fa-fw fa-file',
         ],
         
-        ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'User',
+            'url'  => 'admin/users/index',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Admin',
+            'url'  => 'admin/admins/index',
+            'icon' => 'fas fa-fw fa-user',
         ],
         // [
         //     'text'    => 'multilevel',
